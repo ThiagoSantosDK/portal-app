@@ -17,8 +17,13 @@ return new class extends Migration
             $table->string('titulo');
             $table->string('subtitulo');
             $table->text('texto');
+
             $table->unsignedBigInteger('id_autor');
-            $table->foreign('id_autor')->references('id')->on('cadernos')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_autor')->references('id')->on('autors')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->unsignedBigInteger('id_caderno');
+            $table->foreign('id_caderno')->references('id')->on('cadernos')->onDelete('cascade')->onUpdate('cascade');
+            
             $table->timestamps();
         });
     }

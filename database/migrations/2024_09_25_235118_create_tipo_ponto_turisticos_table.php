@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tipo_ponto_turisticos', function (Blueprint $table) {
             $table->id();
+            $table->string('tipo')->unique();
             $table->timestamps();
         });
     }

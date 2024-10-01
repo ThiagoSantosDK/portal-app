@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('negocios', function (Blueprint $table) {
             $table->id();
+            $table->string('nome_fantasia');
+            $table->text('descricao');
+            $table->string('contato');
+            $table->string('latitude_longitude');
+            $table->boolean('ativo');
+
+            $table->unsignedBigInteger('id_tipo_negocio');
+            $table->foreign('id_tipo_negocio')->references('id')->on('tipo_negocios');
+
+            $table->unsignedBigInteger('id_endereco');
+            $table->foreign('id_endereco')->references('id')->on('enderecos');
+
             $table->timestamps();
         });
     }

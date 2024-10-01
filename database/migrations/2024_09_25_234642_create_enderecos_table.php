@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('enderecos', function (Blueprint $table) {
             $table->id();
+            $table->string('logradouro');
+            $table->string('cep');
+
+            $table->unsignedBigInteger('id_cidade');
+            $table->foreign('id_cidade')->references('id')->on('cidades');
+            
             $table->timestamps();
         });
     }
