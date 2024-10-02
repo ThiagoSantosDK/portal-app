@@ -30,7 +30,7 @@ class NoticiaController extends Controller
         $autores = Autor::all();
         $cadernos = Caderno::all();
 
-        return view('site.noticias.create',compact('autores,cadernos'));
+        return view('admin.noticias.create',compact('autores,cadernos'));
         
     }
 

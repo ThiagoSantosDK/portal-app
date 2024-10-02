@@ -26,7 +26,7 @@ class CidadeController extends Controller
     {
         //
         $estados = Estado::all();
-        return view('site.cidades.create',compact('estados'));
+        return view('admin.cidades.create',compact('estados'));
     }
 
     /**

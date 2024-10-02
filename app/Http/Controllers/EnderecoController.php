@@ -26,7 +26,7 @@ class EnderecoController extends Controller
     {
         //
         $cidades = Cidade::all();
-        return view('site.enderecos.create',compact('cidades'));
+        return view('admin.enderecos.create',compact('cidades'));
     }
 
     /**

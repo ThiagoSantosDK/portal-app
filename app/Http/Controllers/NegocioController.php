@@ -17,7 +17,7 @@ class NegocioController extends Controller
     {
         //
         $negocios = Negocio::paginate(25);
-        return view('admin.enderecos.index',compact('negocios'));
+        return view('admin.negocios.index',compact('negocios'));
     }
 
     /**
@@ -28,7 +28,7 @@ class NegocioController extends Controller
         //
         $enderecos = Endereco::all();
         $tiposNegocios = TipoNegocio::all();
-        return view('site.negocios.create',compact('enderecos','tiposNegocios'));
+        return view('admin.negocios.create',compact('enderecos','tiposNegocios'));
     }
 
     /**

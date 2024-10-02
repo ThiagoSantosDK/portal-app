@@ -24,7 +24,7 @@ class AutorController extends Controller
     public function create()
     {
         //
-        return view('site.autores.create',compact('autor'));
+        return view('admin.autores.create',compact('autor'));
     }
 
     /**

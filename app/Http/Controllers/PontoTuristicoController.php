@@ -28,7 +28,7 @@ class PontoTuristicoController extends Controller
         //
         $enderecos = Endereco::all();
         $tipospontosturisticos = TipoPontoTuristico::all();
-        return view('site.pontosTuristicos.create',compact('enderecos','tipospontosturisticos'));
+        return view('admin.pontosTuristicos.create',compact('enderecos','tipospontosturisticos'));
     }
 
     /**

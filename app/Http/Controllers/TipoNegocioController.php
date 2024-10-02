@@ -14,8 +14,8 @@ class TipoNegocioController extends Controller
     public function index()
     {
         //
-        $tipoNegocios = TipoNegocio::paginate(25);
-        return view('admin.tiposNegocios.index',compact('tipoNegocios'));
+        $tiposNegocios = TipoNegocio::paginate(25);
+        return view('admin.tiposNegocios.index',compact('tiposNegocios'));
     }
 
     /**
@@ -24,7 +24,7 @@ class TipoNegocioController extends Controller
     public function create()
     {
         //
-        return view('site.tiposNegocios.create');
+        return view('admin.tiposNegocios.create');
     }
 
     /**

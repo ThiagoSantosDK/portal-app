@@ -24,7 +24,7 @@ class TipoPontoTuristicoController extends Controller
     public function create()
     {
         //
-        return view('site.tiposPontosTuristicos.create');
+        return view('admin.tiposPontosTuristicos.create');
     }
 
     /**
