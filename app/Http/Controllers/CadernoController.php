@@ -72,6 +72,9 @@ class CadernoController extends Controller
     public function destroy(Caderno $caderno)
     {
         //
+        if ($caderno->noticias()->count() > 0) {
+            return redirect()->away('/cadernos')->with('Error', 'Caderno possui dependentes!');
+        }   
         $caderno->delete();
         return redirect()->away('/cadernos')-with('Sucess', 'Caderno deletado com sucesso');
     }

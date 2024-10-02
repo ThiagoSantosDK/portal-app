@@ -14,6 +14,8 @@ class TipoNegocioController extends Controller
     public function index()
     {
         //
+        $tipoNegocios = TipoNegocio::paginate(25);
+        return view('admin.tiposNegocios.index',compact('tipoNegocios'));
     }
 
     /**
@@ -22,6 +24,7 @@ class TipoNegocioController extends Controller
     public function create()
     {
         //
+        return view('site.tiposNegocios.create');
     }
 
     /**
@@ -30,6 +33,8 @@ class TipoNegocioController extends Controller
     public function store(StoreTipoNegocioRequest $request)
     {
         //
+        TipoNegocio::create($request->all());
+        return redirect()->away('/tiposNegocios')->with('sucess','Tipo Negocio criado com sucesso!');
     }
 
     /**
@@ -38,6 +43,7 @@ class TipoNegocioController extends Controller
     public function show(TipoNegocio $tipoNegocio)
     {
         //
+        return view('admin.tiposNegocios.show',compact('tipoNegocio'));
     }
 
     /**
@@ -46,6 +52,7 @@ class TipoNegocioController extends Controller
     public function edit(TipoNegocio $tipoNegocio)
     {
         //
+        return view('admin.tiposNegocios.edit',compact('tipoNegocio'));
     }
 
     /**
@@ -54,6 +61,8 @@ class TipoNegocioController extends Controller
     public function update(UpdateTipoNegocioRequest $request, TipoNegocio $tipoNegocio)
     {
         //
+        $tipoNegocio->update($request->all());
+        return redirect()->away('/tiposNegocios')->with('Sucess', 'Tipo Negocio atualizado com sucesso!');
     }
 
     /**
@@ -62,5 +71,10 @@ class TipoNegocioController extends Controller
     public function destroy(TipoNegocio $tipoNegocio)
     {
         //
+        if ($tipoNegocio->negocios()->count() > 0) {
+            return redirect()->away('/tiposNegocios')->with('Error', 'Tipo Negocio possui dependentes!');
     }
+    $tipoNegocio->delete();
+    return redirect()->away('/tiposNegocios')-with('Sucess', 'Tipo Negocio deletado com sucesso');
+}
 }

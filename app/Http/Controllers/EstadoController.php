@@ -74,5 +74,7 @@ class EstadoController extends Controller
         if ($estado->cidades()->count() > 0) {
             return redirect()->away('/estados')->with('error', 'Estado possui dependentes');
         }
+        $estado->delete();
+        return redirect()->away('/estados')-with('Sucess', 'Estado deletado com sucesso');
     }
 }

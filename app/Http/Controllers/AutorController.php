@@ -71,6 +71,9 @@ class AutorController extends Controller
     public function destroy(Autor $autor)
     {
         //
+        if ($autor->noticias()->count() > 0) {
+            return redirect()->away('/autores')->with('Error', 'Autor possui dependentes!');
+        }   
         $autor->delete();
         return redirect()->away('/autores')-with('Sucess', 'Autor deletado com sucesso');
     }
