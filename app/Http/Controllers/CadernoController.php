@@ -25,7 +25,7 @@ class CadernoController extends Controller
     public function create()
     {
         //retornar á paginá de criação
-        return view('admin.cadernos.create');
+        return view('admin.cadernos.create',compact('cadernos'));
     }
 
     /**
@@ -34,7 +34,8 @@ class CadernoController extends Controller
     public function store(StoreCadernoRequest $request)
     {
         //Debbug
-        dd($request);
+        Caderno::create($request->all());
+        return redirect()->away('/cadernos')->with('sucess','Caderno criado com sucesso!');
     }
 
     /**
@@ -43,6 +44,7 @@ class CadernoController extends Controller
     public function show(Caderno $caderno)
     {
         //
+        return view('admin.cadernos.show',compact('caderno'));
     }
 
     /**
@@ -51,6 +53,7 @@ class CadernoController extends Controller
     public function edit(Caderno $caderno)
     {
         //
+        return view('admin.cadernos.edit',compact('caderno'));
     }
 
     /**
@@ -59,6 +62,8 @@ class CadernoController extends Controller
     public function update(UpdateCadernoRequest $request, Caderno $caderno)
     {
         //
+        $caderno->update($request->all());
+        return redirect()->away('/cadernos')->with('Sucess', 'Caderno atualizado com sucesso!');
     }
 
     /**
@@ -67,5 +72,7 @@ class CadernoController extends Controller
     public function destroy(Caderno $caderno)
     {
         //
+        $caderno->delete();
+        return redirect()->away('/cadernos')-with('Sucess', 'Caderno deletado com sucesso');
     }
 }

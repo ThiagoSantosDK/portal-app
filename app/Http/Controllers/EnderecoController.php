@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEnderecoRequest;
 use App\Http\Requests\UpdateEnderecoRequest;
+use App\Models\Cidade;
 use App\Models\Endereco;
 
 class EnderecoController extends Controller
@@ -14,6 +15,8 @@ class EnderecoController extends Controller
     public function index()
     {
         //
+        $enderecos = Endereco::paginate(25);
+        return view('admin.enderecos.index',compact('enderecos'));
     }
 
     /**
@@ -22,6 +25,8 @@ class EnderecoController extends Controller
     public function create()
     {
         //
+        $cidades = Cidade::all();
+        return view('site.enderecos.create',compact('cidades'));
     }
 
     /**
@@ -30,6 +35,8 @@ class EnderecoController extends Controller
     public function store(StoreEnderecoRequest $request)
     {
         //
+        Endereco::create($request->all());
+        return redirect()->away('/enderecos')->with('sucess','Endereco criado com sucesso!');
     }
 
     /**
@@ -38,6 +45,7 @@ class EnderecoController extends Controller
     public function show(Endereco $endereco)
     {
         //
+        return view('admin.enderecos.show',compact('endereco'));
     }
 
     /**
@@ -46,6 +54,8 @@ class EnderecoController extends Controller
     public function edit(Endereco $endereco)
     {
         //
+        $cidades = Cidade::all();
+        return view('admin.enderecos.edit',compact('endereco','cidades'));
     }
 
     /**
@@ -54,6 +64,8 @@ class EnderecoController extends Controller
     public function update(UpdateEnderecoRequest $request, Endereco $endereco)
     {
         //
+        $endereco->update($request->all());
+        return redirect()->away('/enderecos')->with('Sucess', 'Endereco atualizado com sucesso!');
     }
 
     /**
@@ -62,5 +74,10 @@ class EnderecoController extends Controller
     public function destroy(Endereco $endereco)
     {
         //
+        if ($endereco->negocios()->count() > 0|| $endereco->pontosTuristicos()->count > 0) {
+            return redirect()->away('/enderecos')->with('error', 'Endereco possui dependentes');
+            }
+            $endereco->delete();
+            return redirect()->away('/enderecos')-with('Sucess', 'Endereco deletado com sucesso');
     }
 }

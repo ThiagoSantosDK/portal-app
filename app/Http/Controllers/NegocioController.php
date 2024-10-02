@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreNegocioRequest;
 use App\Http\Requests\UpdateNegocioRequest;
+use App\Models\Endereco;
 use App\Models\Negocio;
+use App\Models\TipoNegocio;
 
 class NegocioController extends Controller
 {
@@ -14,6 +16,8 @@ class NegocioController extends Controller
     public function index()
     {
         //
+        $negocios = Negocio::paginate(25);
+        return view('admin.enderecos.index',compact('negocios'));
     }
 
     /**
@@ -22,6 +26,9 @@ class NegocioController extends Controller
     public function create()
     {
         //
+        $enderecos = Endereco::all();
+        $tiposNegocios = TipoNegocio::all();
+        return view('site.negocios.create',compact('enderecos','tiposNegocios'));
     }
 
     /**
@@ -30,6 +37,8 @@ class NegocioController extends Controller
     public function store(StoreNegocioRequest $request)
     {
         //
+        Negocio::create($request->all());
+        return redirect()->away('/negocios')->with('sucess','Negocio criado com sucesso!');
     }
 
     /**
@@ -38,6 +47,7 @@ class NegocioController extends Controller
     public function show(Negocio $negocio)
     {
         //
+        return view('admin.negocios.show',compact('negocio'));
     }
 
     /**
@@ -46,6 +56,9 @@ class NegocioController extends Controller
     public function edit(Negocio $negocio)
     {
         //
+        $enderecos = Endereco::all();
+        $tiposNegocios = tipoNegocio::all();
+        return view('admin.negocios.edit',compact('negocio','enderecos','tiposNegocios'));
     }
 
     /**
@@ -54,6 +67,8 @@ class NegocioController extends Controller
     public function update(UpdateNegocioRequest $request, Negocio $negocio)
     {
         //
+        $negocio->update($request->all());
+        return redirect()->away('/negocios')->with('Sucess', 'Negocio atualizado com sucesso!');
     }
 
     /**
@@ -62,5 +77,7 @@ class NegocioController extends Controller
     public function destroy(Negocio $negocio)
     {
         //
+        $negocio->delete();
+        return redirect()->away('/negocios')-with('Sucess', 'Negocio deletado com sucesso');
     }
 }

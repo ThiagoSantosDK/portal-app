@@ -14,6 +14,8 @@ class EstadoController extends Controller
     public function index()
     {
         //
+        $estados = Estado::paginate(25);
+        return view('admin.estados.index',compact('estados'));
     }
 
     /**
@@ -22,6 +24,7 @@ class EstadoController extends Controller
     public function create()
     {
         //
+        return view('site.estados.create',compact('estados'));
     }
 
     /**
@@ -30,6 +33,8 @@ class EstadoController extends Controller
     public function store(StoreEstadoRequest $request)
     {
         //
+        Estado::create($request->all());
+        return redirect()->away('/estados')->with('sucess','Estado criado com sucesso!');
     }
 
     /**
@@ -38,6 +43,7 @@ class EstadoController extends Controller
     public function show(Estado $estado)
     {
         //
+        return view('admin.estados.show',compact('estado'));
     }
 
     /**
@@ -46,6 +52,7 @@ class EstadoController extends Controller
     public function edit(Estado $estado)
     {
         //
+        return view('admin.estados.edit',compact('estado'));
     }
 
     /**
@@ -54,6 +61,8 @@ class EstadoController extends Controller
     public function update(UpdateEstadoRequest $request, Estado $estado)
     {
         //
+        $estado->update($request->all());
+        return redirect()->away('/estados')->with('Sucess', 'Estado atualizado com sucesso!');
     }
 
     /**
@@ -62,5 +71,8 @@ class EstadoController extends Controller
     public function destroy(Estado $estado)
     {
         //
+        if ($estado->cidades()->count() > 0) {
+            return redirect()->away('/estados')->with('error', 'Estado possui dependentes');
+        }
     }
 }

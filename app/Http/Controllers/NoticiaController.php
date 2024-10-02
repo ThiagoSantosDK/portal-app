@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreNoticiaRequest;
 use App\Http\Requests\UpdateNoticiaRequest;
+use App\Models\Autor;
+use App\Models\Caderno;
 use App\Models\Noticia;
 
 class NoticiaController extends Controller
@@ -13,7 +15,10 @@ class NoticiaController extends Controller
      */
     public function index()
     {
-        //
+        //chamar rota index do web.php
+        //Vamos transferir a informação para o arquivo index
+        $noticias = Noticia::paginate(25);
+        return view('admin.noticias.index',compact('noticias'));
     }
 
     /**
@@ -21,7 +26,12 @@ class NoticiaController extends Controller
      */
     public function create()
     {
-        //
+        //carregar tudo o que é necessário para salvar um registro
+        $autores = Autor::all();
+        $cadernos = Caderno::all();
+
+        return view('site.noticias.create',compact('autores,cadernos'));
+        
     }
 
     /**
@@ -29,7 +39,11 @@ class NoticiaController extends Controller
      */
     public function store(StoreNoticiaRequest $request)
     {
-        //
+        //Tratar as regras de salvamento
+        Noticia::create($request->all());
+        //Redimensionar ou devolver uma mensagem para o cliente
+        //return redirect()->route('noticias.index');
+        return redirect()->away('/noticias')->with('sucess','Noticia criada com sucesso!');
     }
 
     /**
@@ -37,7 +51,12 @@ class NoticiaController extends Controller
      */
     public function show(Noticia $noticia)
     {
-        //
+        //$id->recebendo via api
+        //$noticia = Noticia::find($id);
+        //$nome eu quero o primeiro registro
+        //$noticia = Noticia::where('nome,$nome')->first();
+
+        return view('admin.noticias.show',compact('noticia'));
     }
 
     /**
@@ -46,6 +65,9 @@ class NoticiaController extends Controller
     public function edit(Noticia $noticia)
     {
         //
+        $autores = Autor::all();
+        $cadernos = Caderno::all();
+        return view('admin.noticias.edit',compact('noticia','autores','cadernos'));
     }
 
     /**
@@ -54,6 +76,8 @@ class NoticiaController extends Controller
     public function update(UpdateNoticiaRequest $request, Noticia $noticia)
     {
         //
+        $noticia->update($request->all());
+        return redirect()->away('/noticias')->with('Sucess', 'Noticia atualizada com sucesso!');
     }
 
     /**
@@ -61,6 +85,10 @@ class NoticiaController extends Controller
      */
     public function destroy(Noticia $noticia)
     {
-        //
+        //if (cadernos->noticias()->count() > 0){
+        //return redirect()->away('/noticias)->with('error', 'Caderno possui dependentes');
+        //}
+        $noticia->delete();
+        return redirect()->away('/noticias')-with('Sucess', 'Noticia deletada com sucesso');
     }
 }
