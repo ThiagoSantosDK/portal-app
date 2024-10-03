@@ -24,7 +24,7 @@ class UpdateNegocioRequest extends FormRequest
         return [
             //
             'nome_fantasia' => 'required|string|max:255',
-            'descricao' => 'required|string|max:255',
+            'descricao' => 'required|text|max:255',
             'contato' => 'required|string|max:255',
             'latitude_longitude' => 'required|string|max:255', 
             'ativo' => 'required|boolean',
