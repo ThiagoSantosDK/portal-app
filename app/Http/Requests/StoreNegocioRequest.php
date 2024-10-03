@@ -11,7 +11,7 @@ class StoreNegocioRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,13 @@ class StoreNegocioRequest extends FormRequest
     {
         return [
             //
+            'nome_fantasia' => 'required|string|max:255',
+            'descricao' => 'required|string|max:255',
+            'contato' => 'required|string|max:255',
+            'latitude_longitude' => 'required|string|max:255', 
+            'ativo' => 'required|boolean',
+            'id_tipo_negocio' => 'required|exists:tipo_negocios,id',
+            'id_endereco' => 'required|exists:enderecos,id',
         ];
     }
 }

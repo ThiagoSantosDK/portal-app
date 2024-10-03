@@ -11,7 +11,7 @@ class StoreTipoNegocioRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,7 @@ class StoreTipoNegocioRequest extends FormRequest
     {
         return [
             //
+            'tipo' => 'required|string|unique:tiposNegocios,tipo|max:255',
         ];
     }
 }

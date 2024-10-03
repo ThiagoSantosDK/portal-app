@@ -11,7 +11,7 @@ class StoreCidadeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,8 @@ class StoreCidadeRequest extends FormRequest
     {
         return [
             //
+            'nome' => 'required|string|max:255',
+            'estado_id' => 'required|exists:estados,id',
         ];
     }
 }

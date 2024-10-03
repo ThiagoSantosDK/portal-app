@@ -11,7 +11,7 @@ class UpdateCadernoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,10 @@ class UpdateCadernoRequest extends FormRequest
      */
     public function rules(): array
     {
+        $idcaderno = $this->route('caderno');
         return [
             //
+            'nome' => 'required|string|unique:cadernos,nome,'
         ];
     }
 }

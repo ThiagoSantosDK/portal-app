@@ -11,7 +11,7 @@ class StoreTipoPontoTuristicoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,7 @@ class StoreTipoPontoTuristicoRequest extends FormRequest
     {
         return [
             //
+            'tipo' => 'required|string|unique:tiposPontosTuristicos,tipo|max:255',
         ];
     }
 }

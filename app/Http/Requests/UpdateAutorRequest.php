@@ -11,7 +11,7 @@ class UpdateAutorRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,8 @@ class UpdateAutorRequest extends FormRequest
     {
         return [
             //
+            'nome' => 'required|string|max:255',
+            'contato' => 'required|string|max:255',
         ];
     }
 }

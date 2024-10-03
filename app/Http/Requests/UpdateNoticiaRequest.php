@@ -11,7 +11,7 @@ class UpdateNoticiaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,12 @@ class UpdateNoticiaRequest extends FormRequest
     {
         return [
             //
+            'data' => 'required|date',
+            'titulo' => 'required|string|max:255',
+            'subtitulo' => 'required|string|max:255',
+            'texto' => 'required|string',
+            'id_autor' => 'required|exists:autores,id',
+            'id_caderno' => 'required|exists:cadernos,id',
         ];
     }
 }
