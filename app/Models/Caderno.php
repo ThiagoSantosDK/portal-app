@@ -9,4 +9,10 @@ class Caderno extends Model
 {
     use HasFactory;
     protected $fillable = ['nome'];
+
+    public function noticias()
+    {
+        return $this->hasMany(Noticia::class);
+    }
+    
 }
