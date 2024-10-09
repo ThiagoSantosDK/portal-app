@@ -40,27 +40,30 @@ class TipoNegocioController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(TipoNegocio $tipoNegocio)
+    public function show($id)
     {
         //
+        $tipoNegocio = TipoNegocio::find($id);
         return view('admin.tiposNegocios.show',compact('tipoNegocio'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(TipoNegocio $tipoNegocio)
+    public function edit($id)
     {
         //
+        $tipoNegocio = TipoNegocio::find($id);
         return view('admin.tiposNegocios.edit',compact('tipoNegocio'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTipoNegocioRequest $request, TipoNegocio $tipoNegocio)
+    public function update(UpdateTipoNegocioRequest $request, $id)
     {
         //
+        $tipoNegocio = TipoNegocio::find($id);
         $tipoNegocio->update($request->all());
         return redirect()->away('/tiposNegocios')->with('Sucess', 'Tipo Negocio atualizado com sucesso!');
     }
@@ -68,9 +71,10 @@ class TipoNegocioController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TipoNegocio $tipoNegocio)
+    public function destroy($id)
     {
         //
+        $tipoNegocio = TipoNegocio::find($id);
         if ($tipoNegocio->negocios()->count() > 0) {
             return redirect()->away('/tiposNegocios')->with('Error', 'Tipo Negocio possui dependentes!');
     }

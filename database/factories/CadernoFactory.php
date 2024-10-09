@@ -18,6 +18,7 @@ class CadernoFactory extends Factory
     {
         return [
             //
+            'nome' => $this->faker->unique()->word,
         ];
     }
 }

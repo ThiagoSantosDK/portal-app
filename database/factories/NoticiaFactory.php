@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Autor;
+use App\Models\Caderno;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +20,12 @@ class NoticiaFactory extends Factory
     {
         return [
             //
+            'data' => $this->faker->dateTimeThisYear($max = 'now', $timezone = null),
+            'titulo' => $this->faker->sentence,
+            'subtitulo' => $this->faker->sentence,
+            'texto' => $this->faker->text,
+            'id_autor' => Autor::pluck('id')->random(),
+            'id_caderno' => Caderno::pluck('id')->random()
         ];
     }
 }

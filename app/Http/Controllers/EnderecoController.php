@@ -42,18 +42,20 @@ class EnderecoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Endereco $endereco)
+    public function show($id)
     {
         //
+        $endereco = Endereco::find($id);
         return view('admin.enderecos.show',compact('endereco'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Endereco $endereco)
+    public function edit($id)
     {
         //
+        $endereco = Endereco::find($id);
         $cidades = Cidade::all();
         return view('admin.enderecos.edit',compact('endereco','cidades'));
     }
@@ -61,9 +63,10 @@ class EnderecoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEnderecoRequest $request, Endereco $endereco)
+    public function update(UpdateEnderecoRequest $request, $id)
     {
         //
+        $endereco = Endereco::find($id);
         $endereco->update($request->all());
         return redirect()->away('/enderecos')->with('Sucess', 'Endereco atualizado com sucesso!');
     }
@@ -71,9 +74,10 @@ class EnderecoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Endereco $endereco)
+    public function destroy($id)
     {
         //
+        $endereco = Endereco::find($id);
         if ($endereco->negocios()->count() > 0|| $endereco->pontosTuristicos()->count > 0) {
             return redirect()->away('/enderecos')->with('error', 'Endereco possui dependentes');
             }

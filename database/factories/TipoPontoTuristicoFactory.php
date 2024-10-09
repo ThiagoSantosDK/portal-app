@@ -18,6 +18,7 @@ class TipoPontoTuristicoFactory extends Factory
     {
         return [
             //
+            'tipo' => $this->faker->unique()->word
         ];
     }
 }

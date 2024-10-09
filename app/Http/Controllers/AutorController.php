@@ -40,27 +40,30 @@ class AutorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Autor $autor)
+    public function show($id)
     {
         //
+        $autor = Autor::find($id);
         return view('admin.autores.show',compact('autor'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Autor $autor)
+    public function edit($id)
     {
         //
+        $autor = Autor::find($id);
         return view('admin.autores.edit',compact('autor'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAutorRequest $request, Autor $autor)
+    public function update(UpdateAutorRequest $request, $id)
     {
         //
+        $autor = Autor::find($id);
         $autor->update($request->all());
         return redirect()->away('/autores')->with('Sucess', 'Autor atualizado com sucesso!');
     }
@@ -68,9 +71,10 @@ class AutorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Autor $autor)
+    public function destroy($id)
     {
         //
+        $autor = Autor::find($id);
         if ($autor->noticias()->count() > 0) {
             return redirect()->away('/autores')->with('Error', 'Autor possui dependentes!');
         }   

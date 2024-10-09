@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Estado;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,8 @@ class CidadeFactory extends Factory
     {
         return [
             //
+            'nome' => $this->faker->city,
+            'estado_id' => Estado::pluck('id')->random()
         ];
     }
 }

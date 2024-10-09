@@ -49,22 +49,23 @@ class NoticiaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Noticia $noticia)
+    public function show($id)
     {
         //$id->recebendo via api
         //$noticia = Noticia::find($id);
         //$nome eu quero o primeiro registro
         //$noticia = Noticia::where('nome,$nome')->first();
-
+        $noticia = Noticia::find($id);
         return view('admin.noticias.show',compact('noticia'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Noticia $noticia)
+    public function edit($id)
     {
         //
+        $noticia = Noticia::find($id);
         $autores = Autor::all();
         $cadernos = Caderno::all();
         return view('admin.noticias.edit',compact('noticia','autores','cadernos'));
@@ -73,9 +74,10 @@ class NoticiaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateNoticiaRequest $request, Noticia $noticia)
+    public function update(UpdateNoticiaRequest $request, $id)
     {
         //
+        $noticia = Noticia::find($id);
         $noticia->update($request->all());
         return redirect()->away('/noticias')->with('Sucess', 'Noticia atualizada com sucesso!');
     }
@@ -83,11 +85,12 @@ class NoticiaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Noticia $noticia)
+    public function destroy($id)
     {
         //if (cadernos->noticias()->count() > 0){
         //return redirect()->away('/noticias)->with('error', 'Caderno possui dependentes');
         //}
+        $noticia = Noticia::find($id);
         $noticia->delete();
         return redirect()->away('/noticias')-with('Sucess', 'Noticia deletada com sucesso');
     }

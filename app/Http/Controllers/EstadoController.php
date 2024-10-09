@@ -40,27 +40,30 @@ class EstadoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Estado $estado)
+    public function show($id)
     {
         //
+        $estado = Estado::find($id);
         return view('admin.estados.show',compact('estado'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Estado $estado)
+    public function edit($id)
     {
         //
+        $estado = Estado::find($id);
         return view('admin.estados.edit',compact('estado'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEstadoRequest $request, Estado $estado)
+    public function update(UpdateEstadoRequest $request, $id)
     {
         //
+        $estado = Estado::find($id);
         $estado->update($request->all());
         return redirect()->away('/estados')->with('Sucess', 'Estado atualizado com sucesso!');
     }
@@ -68,9 +71,10 @@ class EstadoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Estado $estado)
+    public function destroy($id)
     {
         //
+        $estado = Estado::find($id);
         if ($estado->cidades()->count() > 0) {
             return redirect()->away('/estados')->with('error', 'Estado possui dependentes');
         } 

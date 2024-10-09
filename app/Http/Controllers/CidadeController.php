@@ -42,18 +42,20 @@ class CidadeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Cidade $cidade)
+    public function show($id)
     {
         //
+        $cidade = Cidade::find($id);
         return view('admin.cidades.show',compact('cidade'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Cidade $cidade)
+    public function edit($id)
     {
         //
+        $cidade = Cidade::find($id);
         $estados = Estado::all();
         return view('admin.cidades.edit',compact('cidade','estados'));
     }
@@ -61,9 +63,10 @@ class CidadeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCidadeRequest $request, Cidade $cidade)
+    public function update(UpdateCidadeRequest $request, $id)
     {
         //
+        $cidade = Cidade::find($id);
         $cidade->update($request->all());
         return redirect()->away('/cidades')->with('Sucess', 'Cidade atualizada com sucesso!');
     }
@@ -71,9 +74,10 @@ class CidadeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cidade $cidade)
+    public function destroy($id)
     {
         //
+        $cidade = Cidade::find($id);
         if ($cidade->enderecos()->count() > 0) {
             return redirect()->away('/cidades')->with('error', 'Cidade possui dependentes');
             }

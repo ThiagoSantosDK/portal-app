@@ -41,27 +41,30 @@ class CadernoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Caderno $caderno)
+    public function show($id)
     {
         //
+        $caderno = Caderno::find($id);
         return view('admin.cadernos.show',compact('caderno'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Caderno $caderno)
+    public function edit($id)
     {
         //
+        $caderno = Caderno::find($id);
         return view('admin.cadernos.edit',compact('caderno'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCadernoRequest $request, Caderno $caderno)
+    public function update(UpdateCadernoRequest $request, $id)
     {
         //
+        $caderno = Caderno::find($id);
         $caderno->update($request->all());
         return redirect()->away('/cadernos')->with('Sucess', 'Caderno atualizado com sucesso!');
     }
@@ -69,9 +72,10 @@ class CadernoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Caderno $caderno)
+    public function destroy($id)
     {
         //
+        $caderno = Caderno::find($id);
         if ($caderno->noticias()->count() > 0) {
             return redirect()->away('/cadernos')->with('Error', 'Caderno possui dependentes!');
         }   
