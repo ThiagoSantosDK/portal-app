@@ -20,7 +20,7 @@ class CidadeFactory extends Factory
         return [
             //
             'nome' => $this->faker->city,
-            'estado_id' => Estado::pluck('id')->random()
+            'id_estado' => Estado::pluck('id')->random()
         ];
     }
 }
